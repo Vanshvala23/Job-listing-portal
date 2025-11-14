@@ -1,42 +1,179 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* === RESET === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+body {
+  background: #eef4ff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 10px;
+}
+
+/* === AUTH CONTAINER === */
+.auth-container {
+  width: 100%;
+  max-width: 450px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 68, 255, 0.08);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Heading */
+.auth-container h2 {
+  color: #0f275f;
+  margin-bottom: 10px;
+  font-size: 26px;
+}
+
+.auth-container p {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+/* === INPUTS === */
+.auth-input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 8px 0 16px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 68, 255, 0.2);
+  background: #fdfdfd;
+  font-size: 15px;
+  color: #222;
+  transition: 0.2s;
+}
+
+.auth-input:focus {
+  border-color: #0f4c81;
+  box-shadow: 0px 0px 6px rgba(0, 68, 255, 0.2);
+  outline: none;
+}
+
+/* === BUTTON === */
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  background: #0f4c81;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: 0.2s ease-in-out;
+}
+
+.auth-btn:hover {
+  background: #136bc6;
+}
+
+/* Secondary button */
+.auth-btn-secondary {
+  background: transparent;
+  border: 1px solid #0f4c81;
+  color: #0f4c81;
+}
+
+.auth-btn-secondary:hover {
+  background: #e8f0ff;
+}
+
+/* Small link */
+.auth-link {
+  margin-top: 10px;
+  display: block;
   text-align: center;
+  font-size: 14px;
+  color: #0f4c81;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.auth-link:hover {
+  text-decoration: underline;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Error and success messages */
+.error-msg {
+  color: #e11d48;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.success-msg {
+  color: #0d9488;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
-.card {
-  padding: 2em;
+/* Top role selector container */
+.role-top-selector {
+  display: flex;
+  background: #eef4ff;
+  padding: 6px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  gap: 6px;
 }
 
-.read-the-docs {
-  color: #888;
+/* Each button */
+.role-btn {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f4c81;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Active button (selected role) */
+.role-btn.active {
+  background: white;
+  color: #0f4c81;
+  box-shadow: 0 2px 8px rgba(0, 68, 255, 0.15);
+  border: 1px solid rgba(0, 68, 255, 0.25);
+}
+
+
+/* === DASHBOARD === */
+.dashboard {
+  width: 95%;
+  max-width: 800px;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin: 20px auto;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.3s ease;
+}
+
+.dashboard h1 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #0f275f;
+}
+
+.dashboard p {
+  color: #555;
+  font-size: 16px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
