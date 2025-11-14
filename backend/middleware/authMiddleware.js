@@ -18,4 +18,4 @@ const protect=async (req,res,next)=>{
         res.status(401).json({message:"No token provided"});
     }
 };
-export default protect;
+module.exports=protect;

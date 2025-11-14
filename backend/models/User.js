@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
     name:{type: String, required: true},
     email:{type: String, required: true, unique: true},
     password:{type: String, required: true},
-    role:{type:String ,enum:['Student','HR'], required:true},
+    role:{type:String ,enum:['Employee','HR'], required:true},
     resetPasswordToken: String,
     resetPasswordExpire: Date
 },{timestamps:true});
@@ -23,4 +23,4 @@ UserSchema.methods.matchPassword= async function(enteredPassword)
     return await bcrypt.compare(enteredPassword,this.password);
 }
 const User=mongoose.model("User",UserSchema);
-export default User;
+module.exports=User;
