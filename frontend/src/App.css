@@ -171,6 +171,26 @@ body {
   color: #555;
   font-size: 16px;
 }
+/* SUCCESS & ERROR BOXES */
+.success-box, .error-box {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  animation: fadeIn 0.3s ease;
+}
+
+.success-box {
+  background: #d1fae5;
+  color: #065f46;
+  border-left: 4px solid #10b981;
+}
+
+.error-box {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #ef4444;
+}
 
 /* Animation */
 @keyframes fadeIn {
