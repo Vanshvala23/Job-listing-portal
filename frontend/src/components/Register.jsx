@@ -15,17 +15,17 @@ export default function Register() {
     <div className="auth-container">
       <div className="role-top-selector">
   <button
-    className={data.role === "Employee" ? "role-btn active" : "role-btn"}
-    onClick={() => setData({ ...data, role: "Employee" })}
+    className={data.role === "Candidate" ? "role-btn active" : "role-btn"}
+    onClick={() => setData({ ...data, role: "Candidate" })}
   >
-    Employee
+    Candidate
   </button>
 
   <button
-    className={data.role === "HR" ? "role-btn active" : "role-btn"}
-    onClick={() => setData({ ...data, role: "HR" })}
+    className={data.role === "Employer" ? "role-btn active" : "role-btn"}
+    onClick={() => setData({ ...data, role: "Employer" })}
   >
-    HR
+    Employer
   </button>
 </div>
 
