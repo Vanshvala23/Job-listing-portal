@@ -1,4 +1,6 @@
-/* === RESET === */
+/* =========================================
+   RESET & GLOBAL
+========================================= */
 * {
   margin: 0;
   padding: 0;
@@ -9,12 +11,17 @@
 body {
   background: #eef4ff;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  padding: 40px 10px;
 }
 
-/* === AUTH CONTAINER === */
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   AUTHENTICATION UI
+========================================= */
 .auth-container {
   width: 100%;
   max-width: 450px;
@@ -23,10 +30,10 @@ body {
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 68, 255, 0.08);
+  margin: 40px auto;
   animation: fadeIn 0.4s ease;
 }
 
-/* Heading */
 .auth-container h2 {
   color: #0f275f;
   margin-bottom: 10px;
@@ -39,7 +46,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* === INPUTS === */
+/* Inputs */
 .auth-input {
   width: 100%;
   padding: 12px 14px;
@@ -58,7 +65,7 @@ body {
   outline: none;
 }
 
-/* === BUTTON === */
+/* Buttons */
 .auth-btn {
   width: 100%;
   padding: 12px;
@@ -77,18 +84,6 @@ body {
   background: #136bc6;
 }
 
-/* Secondary button */
-.auth-btn-secondary {
-  background: transparent;
-  border: 1px solid #0f4c81;
-  color: #0f4c81;
-}
-
-.auth-btn-secondary:hover {
-  background: #e8f0ff;
-}
-
-/* Small link */
 .auth-link {
   margin-top: 10px;
   display: block;
@@ -103,20 +98,7 @@ body {
   text-decoration: underline;
 }
 
-/* Error and success messages */
-.error-msg {
-  color: #e11d48;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.success-msg {
-  color: #0d9488;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-/* Top role selector container */
+/* Top Role Selector */
 .role-top-selector {
   display: flex;
   background: #eef4ff;
@@ -126,10 +108,9 @@ body {
   gap: 6px;
 }
 
-/* Each button */
 .role-btn {
   flex: 1;
-  padding: 10px 0;
+  padding: 10px;
   border: none;
   background: transparent;
   font-size: 15px;
@@ -140,19 +121,40 @@ body {
   transition: 0.2s;
 }
 
-/* Active button (selected role) */
 .role-btn.active {
   background: white;
-  color: #0f4c81;
   box-shadow: 0 2px 8px rgba(0, 68, 255, 0.15);
   border: 1px solid rgba(0, 68, 255, 0.25);
 }
 
+/* Success & Error Messages */
+.error-box,
+.success-box {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  animation: fadeIn 0.3s ease;
+}
 
-/* === DASHBOARD === */
+.error-box {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #ef4444;
+}
+
+.success-box {
+  background: #d1fae5;
+  color: #065f46;
+  border-left: 4px solid #10b981;
+}
+
+/* =========================================
+   DASHBOARD (Candidate / Employer)
+========================================= */
 .dashboard {
   width: 95%;
-  max-width: 800px;
+  max-width: 850px;
   background: white;
   padding: 25px;
   border-radius: 12px;
@@ -171,29 +173,211 @@ body {
   color: #555;
   font-size: 16px;
 }
-/* SUCCESS & ERROR BOXES */
-.success-box, .error-box {
-  padding: 12px;
+
+/* =========================================
+   ADMIN LAYOUT
+========================================= */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ------------ SIDEBAR ------------ */
+.admin-sidebar {
+  width: 250px;
+  background: white;
+  border-right: 1px solid #e5e7eb;
+  padding: 25px 20px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+}
+
+.admin-brand {
+  font-weight: 700;
+  font-size: 24px;
+  color: #1d4ed8;
+  margin-bottom: 30px;
+}
+
+.admin-link {
+  display: block;
+  padding: 12px 14px;
+  margin-bottom: 10px;
   border-radius: 8px;
-  margin-bottom: 12px;
-  font-size: 14px;
-  animation: fadeIn 0.3s ease;
+  text-decoration: none;
+  font-size: 15px;
+  color: #374151;
+  transition: 0.2s;
 }
 
-.success-box {
-  background: #d1fae5;
-  color: #065f46;
-  border-left: 4px solid #10b981;
+.admin-link:hover {
+  background: #eef2ff;
+  color: #1d4ed8;
 }
 
-.error-box {
-  background: #fee2e2;
-  color: #991b1b;
-  border-left: 4px solid #ef4444;
+.admin-link.active {
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-weight: 600;
 }
 
-/* Animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.admin-logout {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
+  color: white;
+  background: #dc2626;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.admin-logout:hover {
+  background: #b91c1c;
+}
+
+/* ------------ MAIN AREA ------------ */
+.admin-main {
+  margin-left: 250px;
+  flex: 1;
+  padding: 35px;
+}
+
+.admin-header {
+  margin-bottom: 25px;
+}
+
+.admin-header h1 {
+  font-size: 28px;
+  color: #111827;
+}
+
+/* ------------ CARDS ------------ */
+.admin-cards {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.admin-card {
+  flex: 1;
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+  transition: 0.2s;
+}
+.admin-card h3 {
+  font-size: 18px;
+  color: #374151;
+  margin-bottom: 10px;
+}
+.admin-card p {
+  color: #111827;
+  font-size: 24px;  
+}
+
+.admin-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+}
+
+/* ------------ TABLE ------------ */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 20px;
+  border: 1px solid #e5e7eb;
+}
+
+.admin-table th {
+  background: #eef2ff;
+  padding: 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 15px;
+  color: #1e3a8a;
+}
+
+.admin-table td {
+  padding: 14px;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 15px;
+  color: #374151;
+}
+
+.admin-table tr:hover td {
+  background: #f9fafb;
+}
+
+.btn-danger {
+  background: #dc2626;
+  padding: 8px 14px;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+/* =========================================
+   ADMIN LOGIN PAGE
+========================================= */
+/* .admin-login-container {
+  width: 420px;
+  margin: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+} */
+
+.admin-login-container {
+  width: 420px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.admin-login-container h2 {
+  margin-bottom: 20px;
+  color: #1e3a8a;
+  text-align: center;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 900px) {
+  .admin-cards { flex-direction: column; }
+}
+
+@media (max-width: 700px) {
+  .admin-sidebar { width: 200px; }
+  .admin-main { margin-left: 200px; }
+}
+
+@media (max-width: 500px) {
+  .admin-sidebar { display: none; }
+  .admin-main { margin-left: 0; padding: 20px; }
 }
