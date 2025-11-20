@@ -33,6 +33,7 @@ export default function Register() {
   };
 
   return (
+    <div className="auth-wrapper">
     <div className="auth-container">
 
       {/* Role Selector */}
@@ -85,6 +86,7 @@ export default function Register() {
 
         <a href="/login" className="auth-link">Already have an account?</a>
       </form>
+    </div>
     </div>
   );
 }

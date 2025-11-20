@@ -6,6 +6,10 @@ const UserSchema = new mongoose.Schema({
     email:{type: String, required: true, unique: true},
     password:{type: String, required: true},
     role:{type:String ,enum:['Candidate','Employer','Admin'],default:"Candidate", required:true},
+    profileCompleted: {
+    type: Boolean,
+    default: false
+},
     resetPasswordToken: String,
     resetPasswordExpire: Date
 },{timestamps:true});
