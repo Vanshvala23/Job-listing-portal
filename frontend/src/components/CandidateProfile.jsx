@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "./CandidateProfile.css";
 
 export default function CandidateProfile() {
   const [profile, setProfile] = useState({

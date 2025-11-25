@@ -1,0 +1,4 @@
+# I don't want to push  node_modules and environment files
+node_modules/
+.env
+.env.local  

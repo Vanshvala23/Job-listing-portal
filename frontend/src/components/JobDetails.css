@@ -17,39 +17,40 @@
   margin-bottom: 10px;
 }
 
-/* Sub info */
+/* Meta info */
 .job-details-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   font-size: 16px;
-  color: #475569;
   margin-bottom: 25px;
 }
 
 .job-tag {
-  display: inline-block;
-  padding: 6px 12px;
-  background: #e2e8f0;
+  padding: 6px 14px;
+  background: #eef2f5;
   border-radius: 30px;
-  margin-right: 8px;
   font-size: 14px;
+  color: #475569;
+  border: 1px solid #dce3ea;
 }
 
-/* Main description */
+/* Job Description */
 .job-description {
   margin: 25px 0;
   padding: 20px;
-  background: #f8fafc;
+  background: #f1f5f9;
   border-radius: 10px;
-  white-space: pre-line;
   line-height: 1.6;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #dce3ea;
   color: #334155;
 }
 
-/* Apply section */
+/* Apply Section */
 .apply-box {
   margin-top: 40px;
   padding: 25px;
-  background: #ffffff;
+  background: #fafafa;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
 }
@@ -58,19 +59,19 @@
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 20px;
-    color: #0f172a;
+  color: #0f172a;
 }
 
 .apply-box input,
 .apply-box textarea {
   width: 100%;
-  padding: 12px 14px;
+  padding: 13px 16px;
   border-radius: 10px;
   border: 1px solid #cbd5e1;
   margin-bottom: 15px;
   background: #f8fafc;
   font-size: 15px;
-  transition: 0.2s;
+  transition: 0.2s ease;
 }
 
 .apply-box input:focus,
@@ -81,9 +82,17 @@
   box-shadow: 0 0 0 3px rgba(59,130,246,0.25);
 }
 
+/* Textarea (Cover Letter) */
+.cover-letter {
+  height: 120px;
+  resize: vertical;
+  font-family: inherit;
+  color: #0f172a;
+}
+
 .apply-btn {
   width: 100%;
-  padding: 14px;
+  padding: 15px;
   background: #2563eb;
   color: white;
   border: none;
@@ -91,19 +100,19 @@
   font-size: 17px;
   cursor: pointer;
   font-weight: 600;
-  transition: 0.25s;
+  transition: 0.25s ease;
 }
 
 .apply-btn:hover {
-  background: #1e40af;
+  background: #1f46c5;
   transform: translateY(-1px);
 }
 
 .apply-btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
-/* Responsive */
+/* Mobile */
 @media (max-width: 600px) {
   .job-details-container {
     padding: 20px;
@@ -115,5 +124,9 @@
 
   .apply-box h3 {
     font-size: 20px;
+  }
+
+  .job-tag {
+    font-size: 13px;
   }
 }

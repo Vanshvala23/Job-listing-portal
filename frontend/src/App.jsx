@@ -1,3 +1,4 @@
+import {useState,useEffect}from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Jobs from "./components/Jobs";
@@ -5,6 +6,8 @@ import JobDetails from "./components/JobDetails";
 /* AUTH */
 import Register from "./components/Register";
 import Login from "./components/Login";
+
+import LoadingScreen from "./components/LoadingScreen";
 
 import CreateJob from "./components/CreateJob";
 // import SavedJobs from "./components/SavedJobs";
@@ -32,7 +35,13 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000); // simulate 2 sec loading
+  }, []);
   return (
+    <>{loading ? <LoadingScreen /> :
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -124,7 +133,8 @@ function App() {
         />
 
       </Routes>
-    </Router>
+    </Router>}
+    </>
   );
 }
 

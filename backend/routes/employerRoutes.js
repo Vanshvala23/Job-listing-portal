@@ -5,7 +5,9 @@ const upload = require("../middleware/upload");
 
 const {
   updateEmployerProfile,
-  getMyEmployerProfile
+  getMyEmployerProfile,
+  getMyJobs,
+  getMyApplicants,updateApplicantStatus
 } = require("../controller/employerController");
 
 router.get("/me", protect, getMyEmployerProfile);
@@ -16,5 +18,10 @@ router.post(
   upload.single("logo"),     // Employer logo upload
   updateEmployerProfile
 );
+
+router.get("/jobs", protect, getMyJobs);
+router.get("/applicants", protect, getMyApplicants);
+router.put("/applicant/status/:id", protect, updateApplicantStatus);
+
 
 module.exports = router;

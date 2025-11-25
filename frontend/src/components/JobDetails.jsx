@@ -50,10 +50,17 @@ export default function JobDetails() {
 
       <input type="file" onChange={e => setResume(e.target.files[0])} />
 
-      <textarea placeholder="Cover letter"
+      {/* <textarea placeholder="Cover letter" className="cover-letter"
         value={cover}
         onChange={e => setCover(e.target.value)}
-      ></textarea>
+      ></textarea> */}
+      <textarea 
+  placeholder="Cover letter"
+  className="cover-letter"
+  value={cover}
+  onChange={e => setCover(e.target.value)}
+></textarea>
+
 
       <input
         placeholder="Expected salary"

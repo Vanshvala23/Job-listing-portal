@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./CreateJob.css";
+import Navbar from "./Navbar";
 
 export default function CreateJob() {
   const [job, setJob] = useState({
@@ -49,6 +50,7 @@ export default function CreateJob() {
   };
 
   return (
+    <><Navbar />
     <div className="create-job-container">
       <h2>Post a New Job</h2>
 
@@ -86,5 +88,6 @@ export default function CreateJob() {
 
       <button onClick={createJob}>Post Job</button>
     </div>
+    </>
   );
 }

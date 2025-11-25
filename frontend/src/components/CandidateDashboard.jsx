@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function CandidateDashboard() {
   const [user, setUser] = useState(null);
   const [data, setData] = useState(null);
+  const[loading,setLoading]=useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -17,7 +19,10 @@ export default function CandidateDashboard() {
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => setData(res.data));
 
+    setLoading(false);
   }, []);
+
+  if(loading) return <LoadingScreen/>;
 
   if (!user || !data) return <h2>Loading...</h2>;
 

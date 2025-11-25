@@ -1,16 +1,20 @@
 // frontend/src/components/Applicants.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function Applicants({ jobId }) {
   const [apps, setApps] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(()=> {
     const token = localStorage.getItem("token");
     if(!token) return;
     axios.get(`http://localhost:5000/api/jobs/${jobId}/applicants`, { headers:{Authorization:`Bearer ${token}`} })
       .then(res=>setApps(res.data)).catch(console.error);
-  }, [jobId]);
 
+      setLoading(false);
+  }, [jobId]);
+  if(loading) return <LoadingScreen/>;
   return (
     <div>
       <h3>Applicants</h3>

@@ -1,7 +1,7 @@
 const Job = require("../models/Jobs");
 const Application = require("../models/Application");
 const SavedJob=require("../models/SavedJobs");
-const User = require("../models/User");
+const Users = require("../models/User");
 exports.getJobs = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -73,31 +73,37 @@ exports.createJob = async (req, res) => {
 // POST /api/jobs/:id/apply (Candidate) - multipart/form-data
 exports.applyJob = async (req, res) => {
   try {
-    const job = await Job.findById(req.params.id);
+    const jobId = req.params.id;  // ✅ FIX
+   
+
+    const job = await Job.findById(jobId);
     if (!job) return res.status(404).json({ message: "Job not found" });
 
-    // prevent duplicate application
-    const already = await Application.findOne({ job: job._id, candidate: req.user._id });
-    if (already) return res.status(400).json({ message: "Already applied" });
+    // Check if already applied
+    const alreadyApplied = await Application.findOne({
+      user: req.user.id,
+      job: jobId,
+    });
 
-    const applicationData = {
-      job: job._id,
+    if (alreadyApplied)
+      return res.status(400).json({ message: "Already applied to this job" });
+
+    // Create application
+    await Application.create({
+      user: req.user.id,
+      job: jobId,
       candidate: req.user._id,
+      employer: job.createdBy,   // 🔥 FIX: Use createdBy, NOT job.employer
       coverLetter: req.body.coverLetter,
-      expectedSalary: req.body.expectedSalary
-    };
+      expectedSalary: req.body.expectedSalary,
+      resume: req.file ? req.file.filename : null,
+    });
 
-    if (req.file) applicationData.resume = req.file.path; // multer middleware must be used at route
+    res.status(201).json({ message: "Application submitted successfully" });
 
-    const appDoc = await Application.create(applicationData);
-
-    // optional: create a notification for employer (simple)
-    // emit socket or store notification here for employer
-
-    res.json({ message: "Applied successfully", application: appDoc });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error", error: err });
   }
 };
 

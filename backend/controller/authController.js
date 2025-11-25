@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const emailService = require("../utils/emailService");
 
 // Generate Token
 const generateToken = (id) => {
@@ -19,7 +20,7 @@ exports.registerUser = async (req, res) => {
             return res.status(400).json({ message: "Email already exists" });
 
         const user = await User.create({ name, email, password, role, profileCompleted: false });
-
+        await emailService.sendWelcomeMessage(email, name);
         res.status(201).json({
             message: "User registered successfully",
             token: generateToken(user._id),
