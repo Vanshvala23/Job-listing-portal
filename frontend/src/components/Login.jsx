@@ -88,6 +88,7 @@ export default function Login() {
           <button type="submit" className="auth-btn">Login</button>
 
           <a href="/register" className="auth-link">Create a new account</a>
+          
         </form>
       </div>
     </div>

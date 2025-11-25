@@ -1,12 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
+import Jobs from "./components/Jobs";
+import JobDetails from "./components/JobDetails";
 /* AUTH */
 import Register from "./components/Register";
 import Login from "./components/Login";
 
+import CreateJob from "./components/CreateJob";
+// import SavedJobs from "./components/SavedJobs";
+
 /* CANDIDATE */
 import CandidateDashboard from "./components/CandidateDashboard";
 import CandidateProfile from "./components/CandidateProfile";
+
+import SavedJobs from "./pages/Candidate/SavedJobs";
+import Application from "./pages/Candidate/Application";
 
 /* EMPLOYER */
 import EmployerDashboard from "./components/EmployerDashboard";
@@ -44,6 +52,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/create-job" element={<CreateJob />} />
+
 
         <Route
           path="/candidate/profile"
@@ -65,6 +75,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        {/* <Route path="/candidate/saved-jobs" element={<SavedJobs />} /> */}
 
         <Route
           path="/employer/profile"
@@ -74,6 +85,19 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+                <Route 
+          path="/jobs" 
+          element={
+            <ProtectedRoute role="Candidate">
+              <Jobs />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/candidate/saved" element={<SavedJobs />} />
+<Route path="/candidate/applied" element={<Application />} />
+        <Route path="/jobs/:id" element={<ProtectedRoute role="Candidate"><JobDetails /></ProtectedRoute>} />
+        <Route path="/jobs/:id" element={<JobDetails />} />
 
         {/* ===========================
             ADMIN ROUTES

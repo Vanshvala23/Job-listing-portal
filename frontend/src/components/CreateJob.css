@@ -1,0 +1,105 @@
+.create-job-container {
+  max-width: 650px;
+  width: 90%;
+  margin: 40px auto;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  font-family: "Inter", sans-serif;
+}
+
+.create-job-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1e293b;
+  font-size: 26px;
+  font-weight: 600;
+}
+.create-job-container select
+{
+    margin-top:10px;
+    margin-bottom:5px;
+    font-weight:500;
+    color:#334155;
+}
+.create-job-container input{
+    width: 100%;
+    padding: 12px 14px;
+    margin: 10px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: 0.2s ease;
+    background: #f8fafc;
+    color:#1e293b
+}
+.create-job-container select{
+    width: 100%;
+    padding: 12px 14px;
+    margin: 10px 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: 0.2s ease;
+    background: #f8fafc;
+}
+.create-job-container textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: 0.2s ease;
+  background: #f8fafc;
+}
+
+.create-job-container input:focus,
+.create-job-container select:focus,
+.create-job-container textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  background: white;
+}
+
+.create-job-container textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.create-job-container button {
+  width: 100%;
+  padding: 14px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  font-weight: 500;
+}
+
+.create-job-container button:hover {
+  background: #1e40af;
+  transform: translateY(-1px);
+}
+
+.create-job-container button:active {
+  transform: scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .create-job-container {
+    padding: 20px;
+  }
+
+  .create-job-container h2 {
+    font-size: 22px;
+  }
+}

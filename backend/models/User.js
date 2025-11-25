@@ -6,10 +6,12 @@ const UserSchema = new mongoose.Schema({
     email:{type: String, required: true, unique: true},
     password:{type: String, required: true},
     role:{type:String ,enum:['Candidate','Employer','Admin'],default:"Candidate", required:true},
+    savedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
     profileCompleted: {
     type: Boolean,
     default: false
 },
+    photo: String,
     resetPasswordToken: String,
     resetPasswordExpire: Date
 },{timestamps:true});

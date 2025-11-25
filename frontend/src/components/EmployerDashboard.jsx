@@ -27,7 +27,10 @@ export default function EmployerDashboard() {
         <h2 className="dash-logo">JobPortal</h2>
 
         <a className="side-link active">Dashboard</a>
-        <a className="side-link">Post Job</a>
+       {user?.role === "Employer" && (
+  <a href="/create-job" className="nav-btn">Post Job</a>
+)}
+
         <a className="side-link">Manage Jobs</a>
         <a className="side-link">Applicants</a>
 

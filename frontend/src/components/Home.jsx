@@ -5,8 +5,13 @@ import {
   FaLaptopCode,
   FaBriefcase,
   FaUserTie,
-  FaIndustry
+  FaIndustry,
+  FaShieldAlt,
+  FaBolt,
+  FaUsers
 } from "react-icons/fa";
+
+import "./Home.css";
 
 export default function Home() {
   return (
@@ -15,17 +20,23 @@ export default function Home() {
 
       {/* HERO SECTION */}
       <div className="hero-section">
+        <div className="floating-circle circle1"></div>
+        <div className="floating-circle circle2"></div>
+        <div className="floating-circle circle3"></div>
+
         <div className="hero-content">
           <h1>
-            Find Your <span>Dream Job</span> Faster
+            Discover <span>Your Next Big Opportunity</span>
           </h1>
-          <p>Discover 500,000+ jobs across top companies hiring today</p>
+          <p className="hero-subtitle">
+            Explore internships, jobs & top hiring challenges from leading companies.
+          </p>
 
           {/* Search Bar */}
           <div className="search-box">
             <div className="search-input">
               <FaSearch className="icon" />
-              <input type="text" placeholder="Job title, skills…" />
+              <input type="text" placeholder="Search jobs, roles, skills…" />
             </div>
 
             <div className="search-input">
@@ -33,26 +44,26 @@ export default function Home() {
               <input type="text" placeholder="Location" />
             </div>
 
-            <button className="search-btn">Search Jobs</button>
+            <button className="search-btn">Search</button>
           </div>
         </div>
       </div>
 
-      {/* CATEGORIES SECTION */}
+      {/* CATEGORIES */}
       <div className="category-section">
-        <h2>Popular Job Categories</h2>
-        <p>Choose a category and start browsing jobs</p>
+        <h2 className="section-title">Popular Categories</h2>
+        <p className="section-desc">Explore opportunities curated for you</p>
 
-        <div className="categories">
+        <div className="categories-grid">
           <div className="category-card">
             <FaLaptopCode className="cat-icon" />
-            <h3>IT & Software</h3>
+            <h3>Software & IT</h3>
             <p>45k+ Jobs</p>
           </div>
 
           <div className="category-card">
             <FaBriefcase className="cat-icon" />
-            <h3>Business & Finance</h3>
+            <h3>Finance & Business</h3>
             <p>22k+ Jobs</p>
           </div>
 
@@ -70,9 +81,34 @@ export default function Home() {
         </div>
       </div>
 
+      {/* WHY US */}
+      <div className="why-section">
+        <h2 className="section-title">Why Choose JobVerse?</h2>
+
+        <div className="why-grid">
+          <div className="why-card">
+            <FaBolt className="why-icon" />
+            <h3>Fast Hiring</h3>
+            <p>Quick job applications & faster employer responses.</p>
+          </div>
+
+          <div className="why-card">
+            <FaShieldAlt className="why-icon" />
+            <h3>Verified Companies</h3>
+            <p>All companies & job posts are manually verified.</p>
+          </div>
+
+          <div className="why-card">
+            <FaUsers className="why-icon" />
+            <h3>Smart Match</h3>
+            <p>AI-powered job recommendations tailored for you.</p>
+          </div>
+        </div>
+      </div>
+
       {/* FOOTER */}
       <footer className="footer">
-        <p>© 2025 JobPortal — All Rights Reserved</p>
+        <p>© 2025 JobVerse — Connecting talent with opportunity.</p>
       </footer>
     </div>
   );

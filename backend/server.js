@@ -17,7 +17,7 @@ app.use("/api/auth", require("./routes/authRouter"));
 app.use("/api/admin", require("./routes/adminRouter"));
 app.use("/api/candidate", require("./routes/candidateRoutes"));
 app.use("/api/employer", require("./routes/employerRoutes"));
-
+app.use("/api/jobs", require("./routes/JobRoutes"));
 app.use("/uploads", express.static("uploads"));
 
 
