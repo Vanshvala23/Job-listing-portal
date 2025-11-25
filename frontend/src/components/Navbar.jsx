@@ -37,8 +37,10 @@ export default function Navbar() {
 
   return (
     <nav className="nav-container">
-      <h2 className="nav-logo">JobVerse</h2>
-      
+      <a className="nav-logo">
+        <Link to="/">JobVerse</Link>
+      </a>
+
 
       <ul className="nav-links">
         <li>

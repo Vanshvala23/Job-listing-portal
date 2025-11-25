@@ -19,7 +19,15 @@
   font-weight: 700;
   letter-spacing: 1px;
 }
-
+.nav-logo a
+{
+  text-decoration: none;
+  font-size:26px;
+  color: #1e3a8a;
+  font-weight: 700;
+  letter-spacing: 1px;
+  /* color: inherit; */
+}
 .nav-left {
   display: flex;
   align-items: center;

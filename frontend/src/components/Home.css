@@ -136,6 +136,45 @@
   margin-bottom: 10px;
 }
 
+.internship-section{
+  padding: 70px 40px;
+  background: #f3f4f6;
+  text-align: center;
+}
+.internship-grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 25px;
+}
+.internship-card {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  transition: 0.3s;
+}
+.internship-card h3{
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 15px;
+  color: #0f172a;
+}
+.internship-card p
+{
+  margin-top: 10px;
+  font-size: 15px;
+  color: #475569;
+}
+.internship-card:hover {
+  transform: translateY(-8px);
+}
+
+.internship-icon {
+  font-size: 40px;
+  color: #2563eb;
+}
+
 .why-section {
   padding: 70px 40px;
   background: #f8fafc;
@@ -205,3 +244,40 @@
   }
 }
 
+/* EVENTS / CHALLENGES */
+.events-section { padding: 70px 40px; background: #f3f4f6; text-align: center; }
+.events-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 25px; margin-top: 30px; }
+.event-card { background:white; padding:25px; border-radius:14px; box-shadow:0 3px 10px rgba(0,0,0,0.06); transition:0.3s; cursor:pointer; }
+.event-card:hover { transform: translateY(-8px); }
+.event-icon { font-size: 40px; color: #2563eb; margin-bottom:10px; }
+
+.events-grid h3{
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 15px;
+  color: #0f172a;
+}
+
+/* FEATURED COMPANIES */
+.companies-section { padding:70px 40px; text-align:center; }
+.companies-grid { display:grid; grid-template-columns: repeat(5,1fr); gap:25px; margin-top:30px; }
+.company-card { background:white; padding:20px; border-radius:14px; box-shadow:0 3px 10px rgba(0,0,0,0.06); transition:0.3s; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.company-card:hover { transform: translateY(-8px); }
+.company-icon { font-size:36px; color:#2563eb; margin-bottom:10px; }
+
+.companies-grid .company-card p
+{
+  font-size:15px;
+  color:#475569;
+}
+/* RESPONSIVE */
+@media(max-width:900px){
+  .categories-grid, .internship-grid, .why-grid, .events-grid, .companies-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+@media(max-width:600px){
+  .hero-content h1{ font-size:32px; }
+  .search-box{ flex-direction: column; }
+  .categories-grid, .internship-grid, .why-grid, .events-grid, .companies-grid { grid-template-columns: 1fr; }
+}
