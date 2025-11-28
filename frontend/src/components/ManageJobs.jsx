@@ -2,14 +2,20 @@ import axios from "axios";
 import "./EmployerDashboard.css";
 
 export default function ManageJobs({ jobs, setJobs }) {
-  const headers = { Authorization: `Bearer ${localStorage.getItem("token")}` };
-
+  // const headers = { Authorization: `Bearer ${localStorage.getItem("token")}` };
+  const jobId = localStorage.getItem("jobId");
   const deleteJob = async (id) => {
     if (!window.confirm("Are you sure you want to delete this job post?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/employer/jobs/${id}`, { headers });
-      setJobs((prev) => prev.filter((job) => job._id !== id));
+      await axios.delete(`http://localhost:5000/api/employer/jobs/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    // Remove the job from UI after deleting
+    setJobs(jobs.filter((job) => job._id !== id));
     } catch (err) {
       console.error(err);
       alert("Failed to delete job.");

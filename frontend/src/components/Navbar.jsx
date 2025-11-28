@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.css";
-// import Jobs from "./Jobs";
 
 export default function Navbar() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [role, setRole] = useState(null);
   const [name, setName] = useState("");
   const [dropdown, setDropdown] = useState(false);
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [mobileAccount, setMobileAccount] = useState(false);
 
   const menuRef = useRef();
 
@@ -24,7 +25,7 @@ export default function Navbar() {
     }
   }, []);
 
-  // Close dropdown when clicking outside
+  // Close dropdown on outside click
   useEffect(() => {
     const handler = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -37,20 +38,24 @@ export default function Navbar() {
 
   return (
     <nav className="nav-container">
-      <a className="nav-logo">
-        <Link to="/">JobVerse</Link>
-      </a>
+      <Link to="/" className="nav-logo">
+        JobVerse
+      </Link>
 
+      {/* MOBILE MENU BUTTON */}
+      <div className="mobile-menu-btn" onClick={() => setMobileMenu(!mobileMenu)}>
+        {mobileMenu ? <FaTimes size={24} /> : <FaBars size={24} />}
+      </div>
 
+      {/* DESKTOP LINKS */}
       <ul className="nav-links">
-        <li>
-          <Link to="/jobs">Jobs</Link>
-        </li>
+        <li><Link to="/jobs">Jobs</Link></li>
         <li>Companies</li>
         <li>Services</li>
         <li>Notifications</li>
       </ul>
 
+      {/* RIGHT SIDE */}
       <div className="nav-right" ref={menuRef}>
         {!loggedIn ? (
           <>
@@ -59,71 +64,118 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <div
-              className="profile-avatar"
-              onClick={() => setDropdown(!dropdown)}
-            >
+            <div className="profile-avatar" onClick={() => setDropdown(!dropdown)}>
               <FaUserCircle size={32} />
             </div>
-{dropdown && (
-  <div className="profile-dropdown">
-    <p className="dropdown-name">{name}</p>
-    <hr />
 
-    {/* DASHBOARD */}
-    <Link
-      to={role?.toLowerCase() === "candidate" ? "/candidate/dashboard" : "/employer/dashboard"}
-      className="dropdown-item"
-      onClick={() => setDropdown(false)}
-    >
-      Dashboard
-    </Link>
+            {dropdown && (
+              <div className="profile-dropdown">
+                <p className="dropdown-name">{name}</p>
+                <hr />
 
-    {/* SAVED JOBS — Only for candidates */}
-    {role?.toLowerCase() === "candidate" && (
-      <Link
-        to="/candidate/saved"
-        className="dropdown-item"
-        onClick={() => setDropdown(false)}
-      >
-      Saved Jobs
-      </Link>
-    )}
+                <Link
+                  to={role?.toLowerCase() === "candidate"
+                    ? "/candidate/dashboard"
+                    : "/employer/dashboard"}
+                  className="dropdown-item"
+                >
+                  Dashboard
+                </Link>
 
-    {/* PROFILE */}
-    <Link
-      to={role?.toLowerCase() === "candidate" ? "/candidate/profile" : "/employer/profile"}
-      className="dropdown-item"
-      onClick={() => setDropdown(false)}
-    >
-      View Profile
-    </Link>
+                {role?.toLowerCase() === "candidate" && (
+                  <Link
+                    to="/candidate/saved"
+                    className="dropdown-item"
+                  >
+                    Saved Jobs
+                  </Link>
+                )}
 
-    {/* SETTINGS */}
-    <Link
-      to="/settings"
-      className="dropdown-item"
-      onClick={() => setDropdown(false)}
-    >
-      Settings
-    </Link>
+                <Link
+                  to={role?.toLowerCase() === "candidate"
+                    ? "/candidate/profile"
+                    : "/employer/profile"}
+                  className="dropdown-item"
+                >
+                  View Profile
+                </Link>
 
-    {/* LOGOUT */}
-    <button
-      onClick={() => {
-        localStorage.clear();
-        window.location.reload();
-      }}
-      className="dropdown-item logout"
-    >
-      Logout
-    </button>
-  </div>
-)}
+                <Link to="/settings" className="dropdown-item">
+                  Settings
+                </Link>
 
+                <button
+                  onClick={() => {
+                    localStorage.clear();
+                    window.location.reload();
+                  }}
+                  className="dropdown-item logout"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </>
         )}
       </div>
+
+      {/* MOBILE DROPDOWN MENU */}
+      {mobileMenu && (
+        <div className="mobile-menu">
+          <Link to="/jobs" onClick={() => setMobileMenu(false)}>Jobs</Link>
+          <Link onClick={() => setMobileMenu(false)}>Companies</Link>
+          <Link onClick={() => setMobileMenu(false)}>Services</Link>
+          <Link onClick={() => setMobileMenu(false)}>Notifications</Link>
+
+          {!loggedIn ? (
+            <>
+              <Link className="mobile-btn" to="/login">Login</Link>
+              <Link className="mobile-btn-filled" to="/register">Register</Link>
+            </>
+          ) : (
+            <>
+              <div className="mobile-profile-header" onClick={() => setMobileAccount(!mobileAccount)}>
+                <FaUserCircle size={24} /> {name}
+              </div>
+
+              {mobileAccount && (
+                <div className="mobile-profile-menu">
+                  <Link
+                    to={role?.toLowerCase() === "candidate"
+                      ? "/candidate/dashboard"
+                      : "/employer/dashboard"}
+                  >
+                    Dashboard
+                  </Link>
+
+                  {role?.toLowerCase() === "candidate" && (
+                    <Link to="/candidate/saved">Saved Jobs</Link>
+                  )}
+
+                  <Link
+                    to={role?.toLowerCase() === "candidate"
+                      ? "/candidate/profile"
+                      : "/employer/profile"}
+                  >
+                    View Profile
+                  </Link>
+
+                  <Link to="/settings">Settings</Link>
+
+                  <button
+                    onClick={() => {
+                      localStorage.clear();
+                      window.location.reload();
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      )}
     </nav>
   );
 }

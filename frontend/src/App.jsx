@@ -7,6 +7,9 @@ import JobDetails from "./components/JobDetails";
 import Register from "./components/Register";
 import Login from "./components/Login";
 
+import VerifyEmailNotice from "./pages/VerifyEmailNotice";
+import VerifySuccess from "./pages/VerifySuccess";
+
 import LoadingScreen from "./components/LoadingScreen";
 
 import CreateJob from "./components/CreateJob";
@@ -49,6 +52,10 @@ function App() {
         {/* PUBLIC ROUTES */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/verify-email" element={<VerifyEmailNotice />} />
+
+        <Route path="/verify-success" element={<VerifySuccess />} />
+
 
         {/* ===========================
             CANDIDATE ROUTES

@@ -84,8 +84,12 @@ export default function Register() {
         role: data.role,
       });
 
-      setSuccess("Registered successfully!");
-      setTimeout(() => (window.location.href = "/login"), 1500);
+     setSuccess("Account created! Redirecting...");
+    setTimeout(() => {
+      window.location.href = `http://localhost:5173/verify-email?email=${encodeURIComponent(data.email)}`;
+    }, 1500);
+
+      // setTimeout(() => (window.location.href = "/login"), 1500);
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong");
       setTimeout(() => setError(""), 3000);

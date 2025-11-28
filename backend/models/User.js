@@ -13,7 +13,11 @@ const UserSchema = new mongoose.Schema({
 },
     photo: String,
     resetPasswordToken: String,
-    resetPasswordExpire: Date
+    resetPasswordExpire: Date,
+    isVerified:{
+        type:Boolean,
+        default:false
+    }
 },{timestamps:true});
 
 UserSchema.pre("save",async function(next)

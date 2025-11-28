@@ -112,17 +112,18 @@ exports.toggleSaveJob = async (req, res) => {
   try {
     const jobId = req.params.id;
 
-    // check if saved already
+    // Check if job is already saved
     const exists = await SavedJob.findOne({
       candidate: req.user._id,
       job: jobId
     });
 
     if (exists) {
-      await SavedJob.deleteOne({ _id: exists._id });
-      return res.json({ message: "Unsaved" });
+      // Job is already saved — return an error
+      return res.status(400).json({ message: "Job already saved" });
     }
 
+    // Save the job
     await SavedJob.create({
       candidate: req.user._id,
       job: jobId
@@ -135,6 +136,7 @@ exports.toggleSaveJob = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 // GET /api/jobs/saved
 exports.getSavedJobs = async (req, res) => {

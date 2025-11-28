@@ -107,3 +107,21 @@ exports.updateApplicantStatus = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+exports.deleteMyJob = async (req, res) => {
+  try {
+    const job = await Job.findOneAndDelete({
+      _id: req.params.id,
+      createdBy: req.user._id   // Extra security
+    });
+
+    if (!job) {
+      return res.status(404).json({ message: "Job not found or not authorized" });
+    }
+
+    res.json({ message: "Job deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
