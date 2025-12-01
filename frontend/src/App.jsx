@@ -7,12 +7,16 @@ import JobDetails from "./components/JobDetails";
 import Register from "./components/Register";
 import Login from "./components/Login";
 
+import FindJobs from "./components/FindJobs";
+
 import VerifyEmailNotice from "./pages/VerifyEmailNotice";
 import VerifySuccess from "./pages/VerifySuccess";
 
 import LoadingScreen from "./components/LoadingScreen";
 
 import CreateJob from "./components/CreateJob";
+import CreateInternship from "./components/CreateInternships";
+import InternshipDetails from "./components/InternshipDetails";
 // import SavedJobs from "./components/SavedJobs";
 
 /* CANDIDATE */
@@ -31,7 +35,8 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import ManageUsers from "./pages/ManageUser";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
-
+import ApplyJob from "./components/ApplyJob";
+import Internships from "./components/Internships";
 /* PROTECTED ROUTES */
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -69,8 +74,14 @@ function App() {
           }
         />
         <Route path="/create-job" element={<CreateJob />} />
+        <Route path="/create-internships" element={<CreateInternship />} />
 
+          
+<Route path="/apply/:id" element={<ApplyJob />} />
+        <Route path="/internships" element={<Internships />} />
+        <Route path="/internships/:id" element={<InternshipDetails />} />
 
+        <Route path="/find-jobs" element={<FindJobs />} />
         <Route
           path="/candidate/profile"
           element={

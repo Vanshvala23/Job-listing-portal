@@ -56,6 +56,7 @@ export default function EmployerDashboard() {
         </button>
 
         <a href="/create-job" className="side-link">Post Job</a>
+        <a href="/create-internships" className="side-link">Post Internship</a>
         <button
           className={`side-link ${activePage === "manage" ? "active" : ""}`}
           onClick={() => setActivePage("manage")}

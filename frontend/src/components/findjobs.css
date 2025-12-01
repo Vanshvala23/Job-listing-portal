@@ -1,0 +1,333 @@
+/* findjobs.css - modern, clean layout */
+
+/* Page wrapper */
+.findjobs-page {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #f7f9fc;
+  color: #0f172a;
+}
+
+/* hero */
+.findjobs-hero {
+  padding: 36px 16px;
+  background: linear-gradient(90deg, #eef2ff 0%, #ffffff 100%);
+  border-bottom: 1px solid #e6edf8;
+}
+.findjobs-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.findjobs-hero .left h1 {
+  font-size: 32px;
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+.findjobs-hero .left p {
+  color: #475569;
+  margin: 0;
+}
+
+/* chips */
+.findjobs-chips {
+  max-width: 1200px;
+  margin: 20px auto;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 0 16px;
+}
+.chip {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #e6eefb;
+  cursor: pointer;
+  transition: all .18s;
+  color: #0f172a;
+}
+.chip:hover {
+  transform: translateY(-3px);
+  background: #eef6ff;
+}
+.chip.active {
+  background: #1e3a8a;
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(30,58,175,0.12);
+}
+
+/* main */
+.findjobs-main {
+  max-width: 1200px;
+  margin: 20px auto;
+  display: flex;
+  gap: 24px;
+  padding: 0 16px;
+}
+.findjobs-sidebar {
+  width: 300px;
+}
+.findjobs-list {
+  flex: 1;
+}
+
+/* filter panel */
+.filters-panel {
+  background: rgba(255,255,255,0.9);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(14,30,70,0.06);
+  border: 1px solid rgba(30,58,175,0.05);
+}
+.filters-panel h3 {
+  margin: 0 0 12px;
+  color: #0f172a;
+}
+.f-label {
+  display: block;
+  margin-top: 10px;
+  color: #475569;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+.f-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e6eefb;
+  background: rgb(186, 196, 207);
+  color: #475569;
+}
+
+/* filter buttons */
+.f-apply {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.f-clear {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: #eef2ff;
+  color: #1e3a8a;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* list header */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  gap: 10px;
+}
+.list-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.quick-search {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e6eefb;
+  border-radius: 10px;
+  width: 360px;
+  max-width: 45vw;
+    background: #ffffff;
+    color: #475569;
+
+}
+/* .apply-btn{
+    padding: 10px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.25s ease;
+} */
+
+/* job cards */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.fj-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(14,30,70,0.04);
+  box-shadow: 0 8px 24px rgba(14,30,70,0.04);
+  padding: 16px;
+  transition: transform .18s;
+}
+.fj-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(14,30,70,0.07);
+}
+.fj-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: #eef6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #1e40af;
+  font-size: 20px;
+}
+.fj-logo-box {
+  position: absolute;
+  bottom: -20px;
+  left: 15px;
+}
+
+.fj-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.fj-fallback-logo {
+  width: 65px;
+  height: 65px;
+  background: #ddd;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: bold;
+}
+.title {
+  margin: 0;
+  font-size: 18px;
+}
+.company {
+  color: #6b7280;
+  font-size: 13px;
+}
+.salary-badge {
+  margin-left: auto;
+  background: #ecfdf5;
+  color: #065f46;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+/* tags */
+.tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.tag {
+  background: #f3f4f6;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #374151;
+}
+
+/* description + actions */
+.desc {
+  color: #374151;
+  margin: 12px 0 0;
+  font-size: 14px;
+}
+.fj-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+}
+.btn-view {
+  background: #111827;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.btn-save {
+  background: #376aad;
+  color: #1e293b;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* pagination */
+/* .fij-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 24px 0;
+}
+.pagination button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: white;
+  cursor: pointer;
+}
+.pagination .active {
+  background: #1e40af;
+  color: white;
+  border-color: #1e40af;
+} */
+
+.fj-pagination {
+  margin-top: 30px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.fj-pagination button {
+  padding: 10px 16px;
+  background: blue;
+    color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+.fj-pagination button:hover {
+  background: #1e40af;
+}
+.fj-pagination button.active {
+  background: #1e40af;
+  color: white;
+}
+
+/* others */
+.loading,
+.no-results {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  font-size: 16px;
+  color: #475569;
+}

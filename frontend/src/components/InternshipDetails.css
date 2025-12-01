@@ -1,0 +1,134 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f9fafb;
+  color: #1f2937;
+  margin: 0;
+}
+
+/* Banner */
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg,#eef2ff,#dbeafe);
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+.logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 700;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.title-section h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+.title-section h2 {
+  margin: 5px 0 10px;
+  color: #4f46e5;
+  font-weight: 500;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tags span {
+  background: #e0e7ff;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Apply button */
+.apply-btn {
+  background: #4f46e5;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.apply-btn:hover {
+  background: #3730a3;
+}
+
+/* Main Grid */
+.main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+.left .card, .right .card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+.left h3, .right h3 {
+  color: #4f46e5;
+  margin-bottom: 12px;
+}
+
+/* Skills pills */
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.skills span {
+  background: #eef2ff;
+  color: #1e3a8a;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Quick Info Sticky */
+.sticky {
+  position: sticky;
+  top: 100px;
+}
+.right ul {
+  list-style: none;
+  padding: 0;
+}
+.right li {
+  margin-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+  .sticky {
+    position: relative;
+    top: 0;
+  }
+  .banner {
+    flex-direction: column;
+    text-align: center;
+  }
+}

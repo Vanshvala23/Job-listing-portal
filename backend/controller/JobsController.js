@@ -22,6 +22,7 @@ exports.getJobs = async (req, res) => {
     if (req.query.category) query.category = req.query.category;
     if (req.query.experience) query.experience = req.query.experience;
     if (req.query.workType) query.workType = req.query.workType;
+    if( req.query.companyLogo) query.companyLogo={ $exists: true, $ne: null };
 
     const [jobs, total] = await Promise.all([
       Job.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit),
@@ -46,27 +47,44 @@ exports.getJobById = async (req, res) => {
   }
 };
 
-// POST /api/jobs/create (Employer)
 exports.createJob = async (req, res) => {
   try {
+    if (!req.body || !req.body.title || !req.body.company) {
+      return res.status(400).json({ message: "Title and company are required" });
+    }
+
     const payload = {
-      title: req.body.title,
-      company: req.body.company,
-      location: req.body.location,
-      category: req.body.category,
-      experience: req.body.experience,
-      workType: req.body.workType,
-      skills: Array.isArray(req.body.skills) ? req.body.skills : (req.body.skills ? JSON.parse(req.body.skills) : []),
-      description: req.body.description,
-      salaryMin: req.body.salaryMin,
-      salaryMax: req.body.salaryMax,
-      createdBy: req.user._id
-    };
+  title: req.body.title,
+  company: req.body.company,
+  location: req.body.location || "",
+  category: req.body.category || "",
+  experience: req.body.experience || "",
+  workType: req.body.workType || "",
+  skills: Array.isArray(req.body.skills)
+    ? req.body.skills
+    : req.body.skills
+    ? JSON.parse(req.body.skills)
+    : [],
+  description: req.body.description || "",
+  salaryMin: req.body.salaryMin || null,
+  salaryMax: req.body.salaryMax || null,
+  companyLogo: req.file ? `/uploads/logos/${req.file.filename}` : null,
+  qualifications: req.body.qualifications || "",          // ✅ new
+  responsibilities: req.body.responsibilities || "",    // ✅ new
+  perks: req.body.perks
+    ? Array.isArray(req.body.perks)
+      ? req.body.perks
+      : JSON.parse(req.body.perks)
+    : [],                                                 // ✅ new
+  createdBy: req.user._id,
+};
+
+
     const job = await Job.create(payload);
     res.json({ message: "Job created", job });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };
 

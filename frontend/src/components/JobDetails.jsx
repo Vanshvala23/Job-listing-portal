@@ -1,77 +1,92 @@
-// frontend/src/components/JobDetails.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./JobDetails.css";
+
 export default function JobDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [job, setJob] = useState(null);
-  const [resume, setResume] = useState(null);
-  const [cover, setCover] = useState("");
-  const [expectedSalary, setExpectedSalary] = useState("");
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/jobs/${id}`).then(res => setJob(res.data)).catch(console.error);
+    axios
+      .get(`http://localhost:5000/api/jobs/${id}`)
+      .then((res) => setJob(res.data))
+      .catch(console.error);
   }, [id]);
 
-  const handleApply = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) { alert("Please login"); return; }
-    const fd = new FormData();
-    fd.append("coverLetter", cover);
-    fd.append("expectedSalary", expectedSalary);
-    if (resume) fd.append("resume", resume);
+  if (!job) return <div className="loading">Loading...</div>;
 
-    try {
-      const res = await axios.post(`http://localhost:5000/api/jobs/${id}/apply`, fd, {
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" }
-      });
-      alert(res.data.message || "Applied");
-    } catch (err) { console.error(err); alert(err.response?.data?.message || "Error") }
-  };
-
-  if (!job) return <div className="dashboard"><h2>Loading...</h2></div>;
   return (
-    <div className="job-details-container">
+    <div className="job-page">
+      {/* LEFT: Job Description */}
+      <div className="job-content">
+        <h1 className="job-title">{job.title}</h1>
+        <p className="job-company">{job.company}</p>
 
-    <h1 className="job-details-title">{job.title}</h1>
+        <div className="meta-tags">
+          <span className="tag">📍 {job.location}</span>
+          <span className="tag">💼 {job.experience}</span>
+          <span className="tag">💻 {job.workType}</span>
+          {job.salaryMin && job.salaryMax && (
+            <span className="tag">💰 ₹{job.salaryMin} - ₹{job.salaryMax}</span>
+          )}
+        </div>
 
-    <div className="job-details-meta">
-      <span className="job-tag">{job.company}</span>
-      <span className="job-tag">📍 {job.location}</span>
-      <span className="job-tag">💼 {job.experience}</span>
-      <span className="job-tag">💻 {job.workType}</span>
+        <div className="section">
+          <h2>Job Description</h2>
+          <p>{job.description}</p>
+        </div>
+
+        {job.qualifications && (
+          <div className="section">
+            <h2>Qualifications</h2>
+            <p>{job.qualifications}</p>
+          </div>
+        )}
+
+        {job.responsibilities && (
+          <div className="section">
+            <h2>Responsibilities</h2>
+            <p>{job.responsibilities}</p>
+          </div>
+        )}
+
+        {job.perks?.length > 0 && (
+          <div className="section">
+            <h2>Perks / Benefits</h2>
+            <ul>
+              {job.perks.map((perk, idx) => (
+                <li key={idx}>{perk}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      {/* RIGHT: Sticky Apply Box */}
+      <div className="apply-box">
+        <img
+          src={job.companyLogo ? `http://localhost:5000${job.companyLogo}` : "/placeholder.png"}
+          alt="Company Logo"
+          className="apply-logo"
+        />
+        <h2 className="apply-job-title">{job.title}</h2>
+        <p className="apply-company">{job.company}</p>
+
+        <div className="apply-meta">
+          <p>📍 {job.location}</p>
+          <p>💼 {job.experience}</p>
+          <p>💻 {job.workType}</p>
+          {job.salaryMin && job.salaryMax && (
+            <p>💰 ₹{job.salaryMin} - ₹{job.salaryMax}</p>
+          )}
+        </div>
+
+        <button className="apply-btn" onClick={() => navigate(`/apply/${job._id}`)}>
+          Apply Now
+        </button>
+      </div>
     </div>
-
-    <div className="job-description">{job.description}</div>
-
-    <div className="apply-box">
-      <h3>Apply for this job</h3>
-
-      <input type="file" onChange={e => setResume(e.target.files[0])} />
-
-      {/* <textarea placeholder="Cover letter" className="cover-letter"
-        value={cover}
-        onChange={e => setCover(e.target.value)}
-      ></textarea> */}
-      <textarea 
-  placeholder="Cover letter"
-  className="cover-letter"
-  value={cover}
-  onChange={e => setCover(e.target.value)}
-></textarea>
-
-
-      <input
-        placeholder="Expected salary"
-        value={expectedSalary}
-        onChange={e => setExpectedSalary(e.target.value)}
-      />
-
-      <button className="apply-btn" onClick={handleApply}>
-        Submit Application
-      </button>
-    </div>
-  </div>
   );
 }

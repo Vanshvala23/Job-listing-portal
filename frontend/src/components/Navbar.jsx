@@ -50,6 +50,7 @@ export default function Navbar() {
       {/* DESKTOP LINKS */}
       <ul className="nav-links">
         <li><Link to="/jobs">Jobs</Link></li>
+        <li><Link to="/internships">Internships</Link></li>
         <li>Companies</li>
         <li>Services</li>
         <li>Notifications</li>
@@ -108,6 +109,7 @@ export default function Navbar() {
                   onClick={() => {
                     localStorage.clear();
                     window.location.reload();
+                    window.location.href = "/";
                   }}
                   className="dropdown-item logout"
                 >

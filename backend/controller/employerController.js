@@ -45,8 +45,8 @@ exports.getMyApplicants = async (req, res) => {
 
   const formatted = apps.map((a) => ({
     _id: a._id,
-    jobTitle: a.job.title,
-    userName: a.candidate.name,
+   jobTitle: a.job ? a.job.title : "Deleted Job",
+    userName: a.candidate?a.candidate.name:"Deleted User",
     status: a.status,
     appliedAgo: timeAgo(a.createdAt),
   }));
