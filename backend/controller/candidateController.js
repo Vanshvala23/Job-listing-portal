@@ -7,33 +7,34 @@ exports.updateCandidateProfile = async (req, res) => {
   try {
     const profileData = {
       phone: req.body.phone,
-      photo:req.body.photo,
       location: req.body.location,
       experience: req.body.experience,
-      education: req.body.education
+      education: req.body.education,
     };
 
-    // Convert skills JSON string → Array
+    // skills array
     if (req.body.skills) {
       profileData.skills = JSON.parse(req.body.skills);
     }
 
-    // If resume uploaded
-    if (req.file) {
-      profileData.resume = req.file.path;
-    }
-    if(req.file){
-      profileData.photo=req.file.path;
+    // resume upload
+    if (req.files?.resume) {
+      profileData.resume = "/uploads/resumes/" + req.files.resume[0].filename;
     }
 
-    // Update or create profile
+    // profile image upload
+    if (req.files?.profileImage) {
+      profileData.photo = "/uploads/profiles/" + req.files.profileImage[0].filename;
+    }
+
+    // Update DB
     const profile = await CandidateProfile.findOneAndUpdate(
       { user: req.user._id },
       profileData,
       { new: true, upsert: true }
     );
 
-    // Mark profile as completed inside User model
+    // Flag profile completed
     const user = await User.findById(req.user._id);
     user.profileCompleted = true;
     await user.save();

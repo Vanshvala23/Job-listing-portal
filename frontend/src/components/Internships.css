@@ -1,4 +1,4 @@
-body { font-family: 'Inter', sans-serif; background:#f7f8fc; color:#333; margin:0; padding:0; }
+body { font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; background:#f7f8fc; color:#333; margin:0; padding:0; }
 
 /* HERO */
 .intern-hero-section {
@@ -20,7 +20,7 @@ body { font-family: 'Inter', sans-serif; background:#f7f8fc; color:#333; margin:
 .hero-img img { width:400px; max-width:100%; border-radius:16px; }
 
 /* INTERNSHIP GRID */
-.internship-list-section { width:90%; max-width:1200px; margin:50px auto; }
+.internship-list-section { width:90%; max-width:1200px; margin:30px auto; }
 .internship-list-section h2 { font-size:26px; font-weight:700; margin-bottom:25px; }
 .internship-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
 .internship-card { background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 18px rgba(0,0,0,0.08); transition:transform 0.3s, box-shadow 0.3s; }

@@ -239,3 +239,87 @@
   text-align: center;
 }
 
+.company-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 14px;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 1px solid #e5e7eb;
+}
+
+.card-top {
+  display: flexbox;
+  align-items: center;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+.job-info {
+  flex: 1;
+}
+
+.job-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.company-name {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.skills-row {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.skill-tag {
+  background: #eef2ff;
+  color: #4f46e5;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.job-meta {
+  margin-top: 8px;
+  display: flex;
+  gap: 15px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.card-footer {
+  margin-top: 12px;
+}
+
+.apply-btn {
+  background: #10b981;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.apply-btn:hover {
+  background: #059669;
+}
+
+.unsave-icon {
+  cursor: pointer;
+  color: #ef4444;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.unsave-icon:hover {
+  transform: scale(1.2);
+}
+

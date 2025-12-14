@@ -2,139 +2,84 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./SavedJobs.css";
-import Navbar from "./Navbar";
 
 export default function SavedJobs() {
-  const [jobs, setJobs] = useState([]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 6; // number of cards per page
+  const [savedJobs, setSavedJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    axios
-      .get("http://localhost:5000/api/jobs/saved", {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      .then(res => setJobs(res.data))
-      .catch(console.error);
-  }, []);
-
-  const timeAgo = (dateString) => {
-    const diff = Date.now() - new Date(dateString).getTime();
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    if (days === 0) return "Saved today";
-    if (days === 1) return "Saved 1 day ago";
-    return `Saved ${days} days ago`;
-  };
-
-  const removeSaved = async (jobId) => {
-    const token = localStorage.getItem("token");
+  const fetchSaved = async () => {
     try {
-      await axios.post(
-        `http://localhost:5000/api/jobs/${jobId}/save`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
+      const token = localStorage.getItem("token");
+
+      const res = await axios.get("http://localhost:5000/api/jobs/saved", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      // Filter: remove null, undefined, ObjectId strings, invalid objects
+      const validJobs = res.data.filter(
+        (item) => item.job && typeof item.job === "object"
       );
-      setJobs(jobs.filter(j => j._id !== jobId));
+
+      setSavedJobs(validJobs);
     } catch (err) {
-      console.error(err);
+      console.error("Saved jobs fetch error:", err);
     }
+    setLoading(false);
   };
 
-  // PAGINATION LOGIC
-  const indexOfLast = currentPage * jobsPerPage;
-  const indexOfFirst = indexOfLast - jobsPerPage;
-  const currentJobs = jobs.slice(indexOfFirst, indexOfLast);
+  fetchSaved();
+}, []);
 
-  const totalPages = Math.ceil(jobs.length / jobsPerPage);
 
-  const goToPage = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-      window.scrollTo(0, 0);
-    }
-  };
+  if (loading) return <div className="saved-loading">Loading saved jobs...</div>;
 
   return (
-    <>
-    <Navbar/>
-    <div className="saved-jobs-container">
-      <h2 className="saved-jobs-heading">Saved Jobs</h2>
+  <div className="saved-wrapper">
+    <h1 className="saved-heading">Saved Jobs</h1>
 
-      <div className="saved-jobs-grid">
-        {currentJobs.length === 0 ? (
-          <p>No saved jobs yet.</p>
-        ) : (
-          currentJobs.map(j => (
-            <div key={j._id} className="saved-job-card">
-              <h3 className="saved-job-title">{j.title}</h3>
-              <p className="saved-job-company">{j.company}</p>
+    {savedJobs.length === 0 && (
+      <p className="saved-empty">You haven’t saved any jobs yet.</p>
+    )}
 
-              <div className="saved-job-meta">
-                <span>📍 {j.location}</span>
-                <span>💼 {j.experience}</span>
-                <span>💻 {j.workType}</span>
-              </div>
+    <div className="saved-grid">
+      {savedJobs.map(({ job, _id }) =>
+        job ? (
+          <div key={_id} className="saved-card-modern">
+            <div className="saved-top">
+              <img
+                src={
+                  job.companyLogo
+                    ? `http://localhost:5000/uploads/logos/${job.companyLogo}`
+                    : "/default-logo.png"
+                }
+                alt="Logo"
+                className="saved-modern-logo"
+              />
 
-              <p className="saved-job-skills">
-                {j.skills?.map(s => (
-                  <span key={s}>{s}</span>
-                ))}
-              </p>
-
-              <p className="saved-time">{timeAgo(j.savedAt)}</p>
-
-              <div className="button-row">
-                <Link to={`/jobs/${j._id}`} className="apply-btn">
-                  Apply Now
-                </Link>
-
-                <button
-                  className="remove-btn"
-                  onClick={() => removeSaved(j._id)}
-                >
-                  Remove
-                </button>
+              <div className="saved-info">
+                <h3 className="saved-job">{job.title}</h3>
+                <p className="saved-companyname">{job.company}</p>
+                <span className="saved-location-tag">
+                  📍 {job.location || "Not specified"}
+                </span>
               </div>
             </div>
-          ))
-        )}
-      </div>
 
-      {/* PAGINATION CONTROLS */}
-      {totalPages > 1 && (
-        <div className="pagination">
-          <button
-            className="page-btn"
-            onClick={() => goToPage(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            ◀ Prev
-          </button>
+            <div className="saved-bottom">
+              <Link to={`/jobs/${job._id}`} className="saved-btn view">
+                View Details
+              </Link>
 
-          {[...Array(totalPages)].map((_, i) => (
-            <button
-              key={i}
-              className={`page-number ${currentPage === i + 1 ? "active" : ""}`}
-              onClick={() => goToPage(i + 1)}
-            >
-              {i + 1}
-            </button>
-          ))}
-
-          <button
-            className="page-btn"
-            onClick={() => goToPage(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            Next ▶
-          </button>
-        </div>
+              <Link to={`/apply/${job._id}`} className="saved-btn apply">
+                Apply
+              </Link>
+            </div>
+          </div>
+        ) : null
       )}
     </div>
-    </>
-  );
+  </div>
+);
+
 }

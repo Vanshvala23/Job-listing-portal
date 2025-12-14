@@ -1,6 +1,7 @@
 const EmployerProfile = require("../models/EmployerProfile");
 const User = require("../models/User");
 const Job = require("../models/Jobs");
+const Internships=require("../models/Internships");
 const Application = require("../models/Application");
 const sendEmail=require("../utils/emailService").sendEmail;
 exports.updateEmployerProfile = async (req, res) => {
@@ -53,6 +54,11 @@ exports.getMyApplicants = async (req, res) => {
 
   res.json(formatted);
 };
+
+exports.getMyInternships = async (req, res) => {
+  const internships = await Internships.find({ createdBy: req.user._id });
+  res.json(internships);
+}
 
 
 function timeAgo(date) {

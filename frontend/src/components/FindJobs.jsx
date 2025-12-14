@@ -97,24 +97,6 @@ export default function FindJobs() {
           </div>
         </div>
 
-        {/* CATEGORY CHIPS
-        <div className="findjobs-chips">
-          {categoryChips.map((cat) => (
-            <div
-              key={cat}
-              className={`chip ${filters.category === cat ? "active" : ""}`}
-              onClick={() =>
-                setFilters((prev) => ({
-                  ...prev,
-                  category: prev.category === cat ? "" : cat,
-                }))
-              }
-            >
-              {cat}
-            </div>
-          ))}
-        </div> */}
-
         {/* MAIN CONTENT */}
         <div className="findjobs-main">
           {/* FILTER SIDEBAR */}
@@ -124,21 +106,7 @@ export default function FindJobs() {
 
           {/* JOB LIST */}
           <div className="findjobs-list">
-            <div className="list-header">
-              <input
-                type="text"
-                placeholder="Search job title..."
-                className="quick-search"
-                value={filters.keyword}
-                onChange={(e) =>
-                  setFilters({ ...filters, keyword: e.target.value })
-                }
-              />
-
-              {/* <button className="apply-btn" onClick={() => fetchJobs(1)}>
-                Apply Filters
-              </button> */}
-            </div>
+            
 
             {loading ? (
               <div className="loading">Loading jobs...</div>

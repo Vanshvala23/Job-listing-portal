@@ -154,11 +154,11 @@ export default function Jobs() {
                   <div className="job-company">{job.company}</div>
 
                   <div className="job-meta">
-                    <span>👁 {job.views || 0} Views</span>
+                    <span>{job.experience}</span>
                     <span>📍 {job.location}</span>
                   </div>
                   <button className="view-btn" onClick={() => window.location.href = `/jobs/${job._id}`}>
-                    View Details
+                    View
                   </button>
                 </div>
               </div>

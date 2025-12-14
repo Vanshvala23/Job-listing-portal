@@ -17,11 +17,12 @@ import LoadingScreen from "./components/LoadingScreen";
 import CreateJob from "./components/CreateJob";
 import CreateInternship from "./components/CreateInternships";
 import InternshipDetails from "./components/InternshipDetails";
-// import SavedJobs from "./components/SavedJobs";
+import CompetePage from "./pages/Candidate/CompetePage";
 
 /* CANDIDATE */
 import CandidateDashboard from "./components/CandidateDashboard";
 import CandidateProfile from "./components/CandidateProfile";
+import EditCandidateProfile from "./components/EditCandidateProfile";
 
 import SavedJobs from "./pages/Candidate/SavedJobs";
 import Application from "./pages/Candidate/Application";
@@ -73,6 +74,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/candidate/edit" element={<EditCandidateProfile />} />
         <Route path="/create-job" element={<CreateJob />} />
         <Route path="/create-internships" element={<CreateInternship />} />
 
@@ -102,7 +104,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* <Route path="/candidate/saved-jobs" element={<SavedJobs />} /> */}
+        <Route path="/candidate/saved-jobs" element={<SavedJobs />} />
 
         <Route
           path="/employer/profile"
@@ -121,8 +123,9 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/candidate/saved" element={<SavedJobs />} />
+        <Route path="/compete" element={<CompetePage />}/>
 <Route path="/candidate/applied" element={<Application />} />
+
         <Route path="/jobs/:id" element={<ProtectedRoute role="Candidate"><JobDetails /></ProtectedRoute>} />
         <Route path="/jobs/:id" element={<JobDetails />} />
 

@@ -8,7 +8,6 @@ export default function ApplyJob() {
   const [job, setJob] = useState(null);
   const [resume, setResume] = useState(null);
   const [coverLetter, setCoverLetter] = useState("");
-  const [expectedSalary, setExpectedSalary] = useState("");
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/jobs/${id}`)
@@ -23,7 +22,6 @@ export default function ApplyJob() {
     const fd = new FormData();
     fd.append("resume", resume);
     fd.append("coverLetter", coverLetter);
-    fd.append("expectedSalary", expectedSalary);
 
     try {
       await axios.post(
@@ -106,15 +104,6 @@ export default function ApplyJob() {
             value={coverLetter}
             onChange={e => setCoverLetter(e.target.value)}
           />
-
-          <label>Expected Salary</label>
-          <input
-            type="text"
-            placeholder="e.g. ₹600,000 per annum"
-            value={expectedSalary}
-            onChange={e => setExpectedSalary(e.target.value)}
-          />
-
           <button onClick={handleSubmit}>Submit Application</button>
         </div>
       </div>

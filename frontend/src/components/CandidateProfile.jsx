@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./CandidateProfile.css";
 
 export default function CandidateProfile() {
-  const [profile, setProfile] = useState({
-    phone: "",
-    location: "",
-    skills: "",
-    experience: "",
-    education: ""
-  });
-
-  const [resume, setResume] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [user, setUser] = useState({ name: "", email: "" });
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -21,100 +15,89 @@ export default function CandidateProfile() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        if (res.data) {
-          setProfile({
-            phone: res.data.phone || "",
-            location: res.data.location || "",
-            skills: res.data.skills ? res.data.skills.join(", ") : "",
-            experience: res.data.experience || "",
-            education: res.data.education || "",
-          });
-        }
-      });
+        setProfile(res.data);
+        setUser({
+          name: localStorage.getItem("userName"),
+          email: localStorage.getItem("userEmail"),
+        });
+      })
+      .catch((err) => console.error(err));
   }, []);
 
-  const saveProfile = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
-
-    const formData = new FormData();
-
-    const skillsArray = profile.skills
-      .split(",")
-      .map((s) => s.trim())
-      .filter((s) => s.length > 0);
-
-    formData.append("phone", profile.phone);
-    formData.append("location", profile.location);
-    formData.append("skills", JSON.stringify(skillsArray)); // FIXED
-    formData.append("experience", profile.experience);
-    formData.append("education", profile.education);
-
-    if (resume) formData.append("resume", resume);
-
-    try {
-      await axios.post("http://localhost:5000/api/candidate/update", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      alert("Profile updated successfully!");
-      //redirect to dashboard after profile completion
-        setTimeout(() => {
-          window.location.href = "/candidate/dashboard";
-        });
-    } catch (err) {
-      console.error("PROFILE UPDATE ERROR:", err.response?.data || err);
-      alert("Error saving profile!");
-    }
-  };
+  if (!profile) return <div>Loading...</div>;
 
   return (
-    <div className="dashboard">
-      <h1>Edit Candidate Profile</h1>
+    <div className="profile-page">
 
-      <form onSubmit={saveProfile}>
-        <input
-          className="auth-input"
-          placeholder="Phone"
-          value={profile.phone}
-          onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+      {/* TOP COVER BANNER */}
+      <div className="cover-section"></div>
+
+      {/* PROFILE CARD */}
+      <div className="profile-card">
+
+        {/* PROFILE IMAGE */}
+        <img
+          src={
+            profile.photo
+              ? `http://localhost:5000${profile.photo}`
+              : "/avatar.png"
+          }
+          alt="Profile"
+          className="profile-avatar-big"
         />
 
-        <input
-          className="auth-input"
-          placeholder="Location"
-          value={profile.location}
-          onChange={(e) => setProfile({ ...profile, location: e.target.value })}
-        />
+        <div className="profile-info">
+          <h1>{user.name}</h1>
+          <p className="profile-email">{user.email}</p>
+          <p className="profile-location">📍 {profile.location || "No location provided"}</p>
+        </div>
 
-        <input
-          className="auth-input"
-          placeholder="Skills (comma separated)"
-          value={profile.skills}
-          onChange={(e) => setProfile({ ...profile, skills: e.target.value })}
-        />
+        <Link to="/candidate/edit" className="edit-profile-btn">
+          ✏️ Edit Profile
+        </Link>
+      </div>
 
-        <textarea
-          className="auth-input"
-          placeholder="Experience"
-          value={profile.experience}
-          onChange={(e) => setProfile({ ...profile, experience: e.target.value })}
-        />
+      {/* SKILLS */}
+      <div className="profile-section">
+        <h2>Skills</h2>
+        <div className="skills-wrapper">
+          {profile.skills?.length > 0 ? (
+            profile.skills.map((skill, i) => (
+              <span key={i} className="skill-tag">{skill}</span>
+            ))
+          ) : (
+            <p>No skills added</p>
+          )}
+        </div>
+      </div>
 
-        <textarea
-          className="auth-input"
-          placeholder="Education"
-          value={profile.education}
-          onChange={(e) => setProfile({ ...profile, education: e.target.value })}
-        />
+      {/* EXPERIENCE */}
+      <div className="profile-section">
+        <h2>Experience</h2>
+        <p>{profile.experience || "No experience provided"}</p>
+      </div>
 
-        <input type="file" onChange={(e) => setResume(e.target.files[0])} />
+      {/* EDUCATION */}
+      <div className="profile-section">
+        <h2>Education</h2>
+        <p>{profile.education || "No education provided"}</p>
+      </div>
 
-        <button className="auth-btn">Save Profile</button>
-      </form>
+      {/* RESUME */}
+      {profile.resume && (
+        <div className="profile-section">
+          <h2>Resume</h2>
+
+          <a
+            className="resume-btn"
+            href={`http://localhost:5000${profile.resume}`}
+            download
+          >
+            📄 Download Resume
+          </a>
+        </div>
+      )}
+
     </div>
   );
 }

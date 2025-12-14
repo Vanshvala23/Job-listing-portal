@@ -7,7 +7,7 @@ const {
   updateEmployerProfile,
   getMyEmployerProfile,
   getMyJobs,
-  getMyApplicants,updateApplicantStatus,deleteMyJob
+  getMyApplicants,updateApplicantStatus,deleteMyJob,getMyInternships
 } = require("../controller/employerController");
 
 router.get("/me", protect, getMyEmployerProfile);
@@ -23,6 +23,7 @@ router.get("/jobs", protect, getMyJobs);
 router.get("/applicants", protect, getMyApplicants);
 router.put("/applicant/status/:id", protect, updateApplicantStatus);
 router.delete("/jobs/:id", protect, deleteMyJob);
+router.get("/internships",protect,getMyInternships);
 
 
 module.exports = router;

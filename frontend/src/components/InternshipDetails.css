@@ -1,5 +1,5 @@
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   background: #f9fafb;
   color: #1f2937;
   margin: 0;
@@ -10,9 +10,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg,#eef2ff,#dbeafe);
+  background: linear-gradient(135deg,#9db4ff,#aba7b5);
   padding: 30px;
-  border-radius: 20px;
   margin-bottom: 40px;
   gap: 20px;
 }

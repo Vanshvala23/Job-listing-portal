@@ -88,10 +88,13 @@
 }
 
 .apply-logo {
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
+  /*I want right side */
+  margin: 0 auto;
   object-fit: contain;
   margin-bottom: 15px;
+  margin-right: 240px;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
   background: #f8fafc;
@@ -101,6 +104,10 @@
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 5px;
+  margin-top:-75px;
+  margin-left:74px;
+  align-items: center;
+  justify-items: center;
   color: #1e293b;
 }
 

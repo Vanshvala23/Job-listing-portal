@@ -113,7 +113,6 @@ exports.applyJob = async (req, res) => {
       candidate: req.user._id,
       employer: job.createdBy,   // 🔥 FIX: Use createdBy, NOT job.employer
       coverLetter: req.body.coverLetter,
-      expectedSalary: req.body.expectedSalary,
       resume: req.file ? req.file.filename : null,
     });
 
@@ -128,46 +127,57 @@ exports.applyJob = async (req, res) => {
 // POST /api/jobs/:id/save (Candidate toggles save)
 exports.toggleSaveJob = async (req, res) => {
   try {
-    const jobId = req.params.id;
+    const { id } = req.params;
 
-    // Check if job is already saved
-    const exists = await SavedJob.findOne({
+    const existing = await SavedJob.findOne({
       candidate: req.user._id,
-      job: jobId
+      job: id
     });
 
-    if (exists) {
-      // Job is already saved — return an error
-      return res.status(400).json({ message: "Job already saved" });
+    if (existing) {
+      await SavedJob.findByIdAndDelete(existing._id);
+      return res.json({ message: "Job removed from saved list" });
     }
 
-    // Save the job
-    await SavedJob.create({
+    const saved = await SavedJob.create({
       candidate: req.user._id,
-      job: jobId
+      job: id
     });
 
-    res.json({ message: "Saved" });
-
-  } catch (err) {
-    console.error("SAVE JOB ERROR:", err);
-    res.status(500).json({ message: "Server error" });
+    res.json({ message: "Job saved successfully", saved });
+  } catch (error) {
+    console.error("SAVE JOB ERROR:", error);
+    res.status(500).json({ message: "Server Error" });
   }
 };
 
 
 // GET /api/jobs/saved
+
+// GET /api/jobs/saved
 exports.getSavedJobs = async (req, res) => {
   try {
     const saved = await SavedJob.find({ candidate: req.user._id })
-      .populate("job");
+      .populate({
+        path: "job",
+        model: "Job"
+      })
+      .populate({
+        path: "candidate",
+        model: "User",
+        select: "name email"
+      });
 
-    res.json(saved);
+    const cleaned = saved.filter(s => s.job !== null);
+
+    res.json(cleaned);
   } catch (err) {
     console.error("GET SAVED JOBS ERROR:", err);
     res.status(500).json({ message: "Server error" });
   }
 };
+
+
 // GET /api/jobs/:id/applicants (Employer) — returns applicants for this job
 exports.getApplicants = async (req, res) => {
   try {

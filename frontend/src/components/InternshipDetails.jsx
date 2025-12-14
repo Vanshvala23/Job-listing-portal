@@ -31,10 +31,10 @@ export default function InternshipDetails() {
           <h1>{internship.title}</h1>
           <h2>{internship.company}</h2>
           <div className="tags">
-            {internship.location && <span>📍 {internship.location}</span>}
-            {internship.workType && <span>💼 {internship.workType}</span>}
-            {internship.duration && <span>⏱ {internship.duration}</span>}
-            {internship.stipend && <span>💰 {internship.stipend}</span>}
+            {internship.location && <span>📍 Location: {internship.location}</span>}
+            {internship.workType && <span>💼 Work Type: {internship.workType}</span>}
+            {internship.duration && <span>⏱ Duration: {internship.duration}</span>}
+            {internship.stipend && <span>💰 Stipend: {internship.stipend}</span>}
           </div>
         </div>
         {/* <button className="apply-btn">Apply Now</button> */}

@@ -11,7 +11,6 @@ const ApplicationSchema = new mongoose.Schema({
   candidate: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   resume: { type: String }, 
   coverLetter: { type: String },
-  expectedSalary: { type: String },
   status: { type: String, enum: ["applied","viewed","shortlisted","rejected","hired"], default: "applied" },
   appliedAt: { type: Date, default: Date.now }
 });

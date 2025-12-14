@@ -52,31 +52,6 @@ export default function Home() {
           <p className="hero-subtitle">
             Explore internships, jobs & top hiring challenges from leading companies.
           </p>
-
-          {/* Search Bar */}
-          <div className="search-box">
-            <div className="search-input">
-              <FaSearch className="icon" />
-              <input
-                type="text"
-                placeholder="Search jobs, roles, skills…"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            </div>
-
-            <div className="search-input">
-              <FaMapMarkerAlt className="icon" />
-              <input
-                type="text"
-                placeholder="Location"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              />
-            </div>
-
-            <button className="search-btn" onClick={handleSearch}>Search</button>
-          </div>
         </div>
       </div>
 
@@ -102,6 +77,7 @@ export default function Home() {
           <div className="internship-card"><h3>Software Development Intern</h3><p>Google</p><p>Remote</p></div>
           <div className="internship-card"><h3>Marketing Intern</h3><p>Facebook</p><p>Hybrid</p></div>
           <div className="internship-card"><h3>Finance Intern</h3><p>Amazon</p><p>Hybrid</p></div>
+          <div className="internship-card"><h3>Product Management Intern</h3><p>Microsoft</p><p>Hybrid</p></div>
         </div>
       </div>
 
@@ -140,9 +116,53 @@ export default function Home() {
       </div>
 
       {/* FOOTER */}
-      <footer className="footer">
-        <p>© 2025 JobVerse — Connecting talent with opportunity.</p>
-      </footer>
+<footer className="footer">
+  <div className="footer-container">
+    {/* About */}
+    <div className="footer-section">
+      <h4>About JobVerse</h4>
+      <p>
+        JobVerse connects talent with opportunity. Discover jobs, internships, and challenges from top companies.
+      </p>
+    </div>
+
+    {/* Quick Links */}
+    <div className="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/jobs">Jobs</a></li>
+        <li><a href="/internships">Internships</a></li>
+        <li><a href="/challenges">Challenges</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    {/* Contact */}
+    <div className="footer-section">
+      <h4>Contact</h4>
+      <p>Email: support@jobverse.com</p>
+      <p>Phone: +1 234 567 890</p>
+      <p>Address: 123 Talent Street, Silicon Valley, CA</p>
+    </div>
+
+    {/* Social */}
+    <div className="footer-section">
+      <h4>Follow Us</h4>
+      <div className="social-icons">
+        <a href="https://facebook.com" target="_blank"><FaFacebook /></a>
+        <a href="https://google.com" target="_blank"><FcGoogle /></a>
+        <a href="https://microsoft.com" target="_blank"><FaMicrosoft /></a>
+        <a href="https://amazon.com" target="_blank"><IoLogoAmazon /></a>
+        <a href="https://goldmansachs.com" target="_blank"><SiGoldmansachs /></a>
+      </div>
+    </div>
+  </div>
+
+  <div className="footer-bottom">
+    <p>© 2025 JobVerse — Connecting talent with opportunity.</p>
+  </div>
+</footer>
+
     </div>
   );
 }

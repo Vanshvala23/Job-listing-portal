@@ -18,10 +18,12 @@
   font-size: 42px;
   font-weight: 800;
   line-height: 1.2;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .jobs-hero-content h1 span {
   color: #4f46e5;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .jobs-hero-content p {
@@ -36,26 +38,36 @@
   gap: 12px;
 }
 
+.jobs-hero-btns .primary-btn {
+  padding: 10px 30px;
+}
+
 .primary-btn {
-  padding: 10px 20px;
-  background: #4f46e5;
+  padding: 10px 12px;
+  background: #002c58;
   color: white;
-  border-radius: 8px;
+  border-radius: 20px;
+  font-size:18px;
+  font-weight: 300;
   border: none;
   cursor: pointer;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .outline-btn {
-  padding: 10px 20px;
-  border: 2px solid #4f46e5;
-  color: #4f46e5;
-  border-radius: 8px;
-  background: none;
-  cursor: pointer;
+    background: #f4f7ff;
+    color: #002c58;
+    border-color: #002c58;
+    padding: 10px 12px;
+    font-size: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 300;
+    transition: background 0.2s;
 }
 
 .hero-art {
-  width: 340px;
+  width: 440px;
 }
 
 /* FULL CATEGORY SECTION */
@@ -193,13 +205,13 @@
 }
 
 .view-btn {
-  width: 100%;
-  padding: 18px;
-  display: flex;
+  width: 90px;
+  padding: 10px;
+  display: block;
   background: #4f46e5;
   border: none;
   color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   cursor: pointer;
 }
 

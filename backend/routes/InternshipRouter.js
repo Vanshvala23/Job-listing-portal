@@ -5,7 +5,16 @@ const protect = require("../middleware/authMiddleware");
 const upload = require("../middleware/upload");
 
 // Public
-router.get("/", internshipCtrl.getInternships);
+router.get("/", internshipCtrl.getInternships,async(req,res)=>
+{
+    try{
+        const data=await Internship.find();
+        res.json(data);
+    }
+    catch(err){
+        res.json({message:err.message});
+    }
+});
 router.get("/:id", internshipCtrl.getInternshipById);
 
 // Protected (Employer)

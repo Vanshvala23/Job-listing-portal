@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
-import "./SavedApplied.css";
 import { FaBookmark, FaMapMarkerAlt, FaClock } from "react-icons/fa";
+import "./SavedApplied.css";
 
 export default function SavedJobs() {
   const [jobs, setJobs] = useState([]);
@@ -18,7 +18,6 @@ export default function SavedJobs() {
     await axios.delete(`http://localhost:5000/api/jobs/${jobId}/save`, {
       headers: { Authorization: `Bearer ${token}` }
     });
-
     setJobs(jobs.filter(j => j.job._id !== jobId));
   };
 
@@ -26,7 +25,6 @@ export default function SavedJobs() {
     <>
       <Navbar />
       <div className="saved-wrapper">
-        
         <h2 className="saved-heading">Saved Jobs</h2>
         <p className="saved-subheading">
           Jobs you saved for later. Apply before applications close.
@@ -40,9 +38,18 @@ export default function SavedJobs() {
           {jobs.map(j => (
             <div className="saved-card" key={j._id}>
               
-              {/* Header */}
+              {/* Header with logo */}
               <div className="card-top">
-                <div>
+                <img
+                  src={
+                    j.job.companyLogo
+                      ? `http://localhost:5000/${j.job.companyLogo.replace(/^\/+/, "")}`
+                      : "/default-logo.png"
+                  }
+                  alt={j.job.company}
+                  className="company-logo"
+                />
+                <div className="job-info">
                   <h3 className="job-title">{j.job.title}</h3>
                   <p className="company-name">{j.job.company}</p>
                 </div>
@@ -54,7 +61,7 @@ export default function SavedJobs() {
 
               {/* Meta Info */}
               <div className="job-meta">
-                <span><FaMapMarkerAlt /> {j.job.location}</span>
+                <span><FaMapMarkerAlt /> {j.job.location || "Not specified"}</span>
                 <span><FaClock /> Saved: {new Date(j.savedAt).toLocaleDateString()}</span>
               </div>
 
@@ -71,11 +78,9 @@ export default function SavedJobs() {
                   Apply Now
                 </a>
               </div>
-
             </div>
           ))}
         </div>
-
       </div>
     </>
   );
